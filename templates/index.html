@@ -1,0 +1,152 @@
+<!DOCTYPE HTML>
+
+		<script src="static/js/jquery.min.js"></script>
+		<script src="static/js/browser.min.js"></script>
+		<script src="static/js/breakpoints.min.js"></script>
+		<script src="static/js/main.js"></script>
+<html>
+	<head>
+		<title>Foodie</title>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="static/css/main.css" />
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	</head>
+	<body class="is-preload">
+
+		<!-- Content -->
+			<div id="content">
+				<div class="inner">
+
+					<!-- Post -->
+						<article class="box post post-excerpt">
+							<header>
+								<h2>Welcome to Foodie</h2>
+								<p>Make a Selection from the filters to get a random resturant!</p>
+							</header>
+
+						</article>
+					<form id="form" onsubmit="sendFormData()">
+					<label for="categories" class="label">Choose a category:</label><br>
+					<select id="categories" class="categories">
+							<option><a value="1">Pizza</a></option>
+							<option><a value="2">Mexican</a></option>
+							<option><a value="3">Asian</a></option>
+							<option><a value="4">Burgers</a></option>
+					</select><br>
+				<label for="price-collection" class="label">Choose a Price Range:</label><br>
+
+				<div class="container">
+				<div class="price-collection collection" id="price-collection">
+					<div class="row">
+					<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+					<div class="info-block block-info clearfix">
+						<div data-toggle="buttons" class="btn-group bizmoduleselect">
+							<label class="btn btn-default">
+								<div class="itemcontent">
+									<input class="hidden price-input" type="checkbox" name="var_id[]" autocomplete="off" value="1">
+									<span class="fas fa-dollar-sign fa-2x"></span>
+								</div>
+							</label>
+						</div>
+					</div>
+					</div>
+					<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<div class="info-block block-info clearfix">
+							<div data-toggle="buttons" class="btn-group itemcontent">
+								<label class="btn btn-default">
+									<div class="itemcontent">
+										<input class="hidden price-input" type="checkbox" name="var_id[]" autocomplete="off" value="2">
+										<span class="fas fa-dollar-sign fa-2x"></span>
+										<span class="fas fa-dollar-sign fa-2x"></span>
+									</div>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<div class="info-block block-info clearfix">
+							<div data-toggle="buttons" class="btn-group itemcontent">
+								<label class="btn btn-default">
+									<div class="itemcontent">
+										<input class="hidden price-input" type="checkbox" name="var_id[]" autocomplete="off" value="3">
+										<span class="fas fa-dollar-sign fa-2x"></span>
+										<span class="fas fa-dollar-sign fa-2x"></span>
+										<span class="fas fa-dollar-sign fa-2x"></span>
+									</div>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+
+				<label for="distance-collection" class="label">Distance (miles):</label><br>
+				<div class="container">
+				<div class="distance-collection collection" id="distance-collection">
+					<div class="row">
+					<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+					<div class="info-block block-info clearfix">
+						<div data-toggle="buttons" class="btn-group bizmoduleselect">
+							<label class="btn btn-default">
+								<div class="itemcontent">
+									<input class="hidden distance-input" type="checkbox" name="var_id[]" autocomplete="off" value="5">
+									<h5>5</h5>
+								</div>
+							</label>
+						</div>
+					</div>
+					</div>
+					<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<div class="info-block block-info clearfix">
+							<div data-toggle="buttons" class="btn-group itemcontent">
+								<label class="btn btn-default">
+									<div class="itemcontent">
+										<input class="hidden distance-input" type="checkbox" name="var_id[]" autocomplete="off" value="10">
+										<h5>10</h5>
+									</div>
+								</label>
+							</div>
+						</div>
+					</div>
+					<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+						<div class="info-block block-info clearfix">
+							<div data-toggle="buttons" class="btn-group itemcontent">
+								<label class="btn btn-default">
+									<div class="itemcontent">
+										<input class="hidden distance-input" type="checkbox" name="var_id[]" autocomplete="off" value="20">
+										<h5>20</h5>
+									</div>
+								</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				</div>
+				</div>
+				<input class="submit-btn" type="submit" value="Submit" onclick="">
+				</form>
+
+				<!-- Search -->
+<!--					<section class="box search">-->
+<!--						<form method="post" action="#">-->
+<!--							<input type="text" class="text" name="search" placeholder="Search" />-->
+<!--						</form>-->
+<!--					</section>-->
+
+				<div id="resturant-container" class="modal" style="display:none">
+					<div class="modal-content">
+						<span class="close">&times;</span>
+						<h3 id='resturant-name'></h3>
+						<h5><a id='yelp-url' href='' target='_blank' class='text-info'>See on Yelp</a></h5>
+						<h5>Phone Number: </h5><h5 class="phone-number"></h5>
+						<h5>Location: </h5><h5><a id='google-maps-url' class="resturant-location text-info" href='' target='_blank'></a></h5>
+					</div>
+				</div>		
+				</div>
+				<footer class="text-muted">Powered by Yelp</footer>
+			</div>
+
+	</body>
+</html>
