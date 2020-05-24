@@ -30,7 +30,14 @@ footer, header, hgroup, menu, nav, section {
 	display: block;}
 
 body {
+	background-color: cornflowerblue !important;
+	display: table-cell;
+	vertical-align: middle;
 	line-height: 1;
+}
+html {
+	display: table;
+	margin: auto;
 }
 
 ol, ul {
@@ -2326,28 +2333,6 @@ textarea {
 			margin: 0 0 1.25em 0;
 		}
 
-/* Content */
-
-	#content {
-		position: relative;
-		background-color: #fff;
-		background-image: url("images/bg02.png");
-		width: 100%;
-		-moz-flex-grow: 1;
-		-webkit-flex-grow: 1;
-		-ms-flex-grow: 1;
-		flex-grow: 1;
-		-moz-flex-shrink: 1;
-		-webkit-flex-shrink: 1;
-		-ms-flex-shrink: 1;
-		flex-shrink: 1;
-	}
-
-		#content > .inner {
-			position: relative;
-			z-index: 1;
-		}
-
 /* Copyright */
 
 	#copyright {
@@ -2510,25 +2495,6 @@ textarea {
 					text-decoration: none;
 					color: #fff;
 				}
-
-		/* Content */
-
-			#content {
-				box-shadow: 0 0 0.25em 0em rgba(0, 0, 0, 0.25);
-			}
-
-				#content > .inner {
-
-					/*
-								This sets an upper limit on your page content to prevent it
-								from looking insane on really wide displays. It's currently set
-								to the width of the sample post images, but you can change it to
-								whatever you like (or remove it entirely).
-							*/
-
-					max-width: 1038px;
-				}
-
 		/* Copyright */
 
 			#copyright {
@@ -3009,8 +2975,6 @@ textarea {
 		padding: 10px 20px;
 		}
 	.categories {
-		width: 10%;
-		
 	}
 	select option {
 		text-align: center;
@@ -3037,12 +3001,12 @@ textarea {
 		width:100%;
 	}
 	.collection .btn-group{
-		width:55%;
+		width:77%;
 	}
 	input[type=checkbox].hidden{
 		display: none;
 	 }
-	 .price-activated {
+	 .multiple-activated {
 		 background-color: #305891 !important;
 		 color: #FFF !important;
 	 }
@@ -3090,4 +3054,10 @@ textarea {
 	cursor: pointer;
 	}
 
-	
+	.inner {
+		background-color: antiquewhite;
+    	padding: 50px;
+	}
+	.itemcontent > h5 {
+		font-weight: bold;
+	}

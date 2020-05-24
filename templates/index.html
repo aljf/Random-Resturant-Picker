@@ -14,11 +14,9 @@
 	</head>
 	<body class="is-preload">
 
-		<!-- Content -->
-			<div id="content">
-				<div class="inner">
+			<div id="">
+				<div class="">
 
-					<!-- Post -->
 						<article class="box post post-excerpt">
 							<header>
 								<h2>Welcome to Foodie</h2>
@@ -27,13 +25,63 @@
 
 						</article>
 					<form id="form" onsubmit="sendFormData()">
-					<label for="categories" class="label">Choose a category:</label><br>
-					<select id="categories" class="categories">
-							<option><a value="1">Pizza</a></option>
-							<option><a value="2">Mexican</a></option>
-							<option><a value="3">Asian</a></option>
-							<option><a value="4">Burgers</a></option>
-					</select><br>
+					<label for="categories-collection" class="label">Choose a category:</label><br>
+					<div class="container">
+					<div class="categories-collection collection" id="categories-collection">
+						<div class="row">
+							<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+								<div class="info-block block-info clearfix">
+									<div data-toggle="buttons" class="btn-group bizmoduleselect">
+										<label class="btn btn-default">
+											<div class="itemcontent">
+												<input class="hidden category-input multiple" type="checkbox" name="var_id[]" autocomplete="off" value="pizza">
+												<h1>Pizza</h1>
+											</div>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+								<div class="info-block block-info clearfix">
+									<div data-toggle="buttons" class="btn-group itemcontent">
+										<label class="btn btn-default">
+											<div class="itemcontent">
+												<input class="hidden category-input multiple" type="checkbox" name="var_id[]" autocomplete="off" value="mexican">
+												<h1>Mexican</h1>
+											</div>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+								<div class="info-block block-info clearfix">
+									<div data-toggle="buttons" class="btn-group itemcontent">
+										<label class="btn btn-default">
+											<div class="itemcontent">
+												<input class="hidden category-input multiple" type="checkbox" name="var_id[]" autocomplete="off" value="burgers">
+												<h1>Burgers</h1>
+											</div>
+										</label>
+									</div>
+								</div>
+							</div>
+							<div class="items col-xs-6 col-sm-3 col-md-3 col-lg-3">
+								<div class="info-block block-info clearfix">
+									<div data-toggle="buttons" class="btn-group itemcontent">
+										<label class="btn btn-default">
+											<div class="itemcontent">
+												<input class="hidden category-input multiple" type="checkbox" name="var_id[]" autocomplete="off" value="vietnamese,korean,japanese,thai,chinese">
+												<h1>Asian</h1>
+											</div>
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					</div><br>
+
+
 				<label for="price-collection" class="label">Choose a Price Range:</label><br>
 
 				<div class="container">
@@ -44,8 +92,8 @@
 						<div data-toggle="buttons" class="btn-group bizmoduleselect">
 							<label class="btn btn-default">
 								<div class="itemcontent">
-									<input class="hidden price-input" type="checkbox" name="var_id[]" autocomplete="off" value="1">
-									<span class="fas fa-dollar-sign fa-2x"></span>
+									<input class="hidden price-input multiple" type="checkbox" name="var_id[]" autocomplete="off" value="1">
+									<span class="fas fa-dollar-sign fa-4x"></span>
 								</div>
 							</label>
 						</div>
@@ -56,9 +104,9 @@
 							<div data-toggle="buttons" class="btn-group itemcontent">
 								<label class="btn btn-default">
 									<div class="itemcontent">
-										<input class="hidden price-input" type="checkbox" name="var_id[]" autocomplete="off" value="2">
-										<span class="fas fa-dollar-sign fa-2x"></span>
-										<span class="fas fa-dollar-sign fa-2x"></span>
+										<input class="hidden price-input multiple" type="checkbox" name="var_id[]" autocomplete="off" value="2">
+										<span class="fas fa-dollar-sign fa-4x"></span>
+										<span class="fas fa-dollar-sign fa-4x"></span>
 									</div>
 								</label>
 							</div>
@@ -69,10 +117,10 @@
 							<div data-toggle="buttons" class="btn-group itemcontent">
 								<label class="btn btn-default">
 									<div class="itemcontent">
-										<input class="hidden price-input" type="checkbox" name="var_id[]" autocomplete="off" value="3">
-										<span class="fas fa-dollar-sign fa-2x"></span>
-										<span class="fas fa-dollar-sign fa-2x"></span>
-										<span class="fas fa-dollar-sign fa-2x"></span>
+										<input class="hidden price-input multiple" type="checkbox" name="var_id[]" autocomplete="off" value="3">
+										<span class="fas fa-dollar-sign fa-4x"></span>
+										<span class="fas fa-dollar-sign fa-4x"></span>
+										<span class="fas fa-dollar-sign fa-4x"></span>
 									</div>
 								</label>
 							</div>
@@ -92,7 +140,7 @@
 							<label class="btn btn-default">
 								<div class="itemcontent">
 									<input class="hidden distance-input" type="checkbox" name="var_id[]" autocomplete="off" value="5">
-									<h5>5</h5>
+									<h1>5</h1>
 								</div>
 							</label>
 						</div>
@@ -104,7 +152,7 @@
 								<label class="btn btn-default">
 									<div class="itemcontent">
 										<input class="hidden distance-input" type="checkbox" name="var_id[]" autocomplete="off" value="10">
-										<h5>10</h5>
+										<h1>10</h1>
 									</div>
 								</label>
 							</div>
@@ -116,7 +164,7 @@
 								<label class="btn btn-default">
 									<div class="itemcontent">
 										<input class="hidden distance-input" type="checkbox" name="var_id[]" autocomplete="off" value="20">
-										<h5>20</h5>
+										<h1>20</h1>
 									</div>
 								</label>
 							</div>

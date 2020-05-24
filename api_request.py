@@ -32,16 +32,12 @@ from urllib.parse import urlencode
 
 
 
-# It now uses private keys to authenticate requests (API Key)
-# You can find it on
-# https://www.yelp.com/developers/v3/manage_app
 API_KEY = os.environ.get('YELP_API_KEY')
 
 
-# API constants, you shouldn't have to change these.
 API_HOST = 'https://api.yelp.com'
 SEARCH_PATH = '/v3/businesses/search'
-BUSINESS_PATH = '/v3/businesses/'  # Business ID will come after slash.
+BUSINESS_PATH = '/v3/businesses/' 
 
 SEARCH_LIMIT = 20
 
@@ -73,7 +69,7 @@ def api_request(host, path, api_key, url_params=None):
     return response.json()
 
 
-def search(api_key, term, location, price, miles):
+def search(api_key, term, location, price, miles, categories):
     """Query the Search API by a search term and location.
     Args:
         term (str): The search term passed to the API.
@@ -84,7 +80,8 @@ def search(api_key, term, location, price, miles):
     radius = int(miles)*1609
 
     url_params = {
-        'term': term,
+        # 'term': term,
+        'categories': categories,
         'latitude': location[0],
         'longitude': location[1],
         'limit': SEARCH_LIMIT,
@@ -95,13 +92,13 @@ def search(api_key, term, location, price, miles):
     return api_request(API_HOST, SEARCH_PATH, api_key, url_params=url_params)
 
 
-def query_api(term, location, price, radius):
+def query_api(categories, location, price, radius):
     """Queries the API by the input values from the user.
     Args:
         term (str): The search term to query.
         location (str): The location of the business to query.
     """
-    response = search(API_KEY, term, location, price, radius)
+    response = search(API_KEY, None, location, price, radius, categories)
 
     businesses = response.get('businesses')
     business_id_arr = []
@@ -119,11 +116,11 @@ def query_api(term, location, price, radius):
 
 def main(jsresponse):
     price = jsresponse.json['price']
-    term = jsresponse.json['term']
+    categories = jsresponse.json['categories']
     location = jsresponse.json['location']
     radius = jsresponse.json['radius']
     # try:
-    return query_api(term, location, price, radius)
+    return query_api(categories, location, price, radius)
     # except HTTPError as error:
     #     sys.exit(
     #         'Encountered HTTP error {0} on {1}:\n {2}\nAbort program.'.format(

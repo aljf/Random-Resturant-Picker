@@ -33,11 +33,11 @@ $( document ).ready(function() {
 	})
 	getLocation();
 
-	$('.price-input').click(function() {
-		if ($(this).parent().parent().hasClass('price-activated')){
-			$(this).parent().parent().removeClass('price-activated');
+	$('.multiple').click(function() {
+		if ($(this).parent().parent().hasClass('multiple-activated')){
+			$(this).parent().parent().removeClass('multiple-activated');
 		} else {
-			$(this).parent().parent().addClass('price-activated');
+			$(this).parent().parent().addClass('multiple-activated');
 		}	
 	})
 
@@ -61,7 +61,7 @@ function sendFormData() {
 	// send ajax to the python server 
 	// show the response on the html
 	let price_val = '';
-	let term_val = '';
+	let categories_val = '';
 	let radius_val;
 	// let rating;
 	$(".price-input:checked").each(function(){
@@ -69,15 +69,21 @@ function sendFormData() {
 			price_val = price_val + $(this).val();
 		} else {
 			price_val = price_val + ', ' + $(this).val();
-		}
-		
+		}	
 	});
-	term_val = $('#categories option:selected').text();
+	$(".category-input:checked").each(function(){
+		if (categories_val.length == 0) {
+			categories_val = $(this).val();
+		} else {
+			categories_val = categories_val + ',' + $(this).val();
+		}	
+	});
 	$(".distance-input:checked").each(function(){
 		radius_val = $(this).val();
 	});
-	let formData = {price: price_val, term: term_val, radius: radius_val, location: location_val};
+	let formData = {price: price_val, categories: categories_val, radius: radius_val, location: location_val};
 	let str_data = JSON.stringify(formData);
+	console.log(formData);
 	$.ajax({
 		type: "POST",
 		url: "/postmethod",
@@ -105,7 +111,6 @@ function showPosition(position) {
 function getFormData() {
 	$.get("/getmethod", function(data) {
 		response = $.parseJSON(data);
-		console.log(response);
 	})
 }
 
