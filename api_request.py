@@ -115,12 +115,16 @@ def query_api(categories, location, price, radius):
 
 
 def main(jsresponse):
+    errorLocation = False
     price = jsresponse.json['price']
     categories = jsresponse.json['categories']
-    location = jsresponse.json['location']
+    try:
+        location = jsresponse.json['location']
+    except KeyError:
+        return {'errorLocation': True}
     radius = jsresponse.json['radius']
     # try:
-    return query_api(categories, location, price, radius)
+    return query_api(categories, location, price, radius)  
     # except HTTPError as error:
     #     sys.exit(
     #         'Encountered HTTP error {0} on {1}:\n {2}\nAbort program.'.format(

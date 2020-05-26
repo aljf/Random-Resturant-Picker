@@ -83,7 +83,7 @@ function sendFormData() {
 	});
 	let formData = {price: price_val, categories: categories_val, radius: radius_val, location: location_val};
 	let str_data = JSON.stringify(formData);
-	console.log(formData);
+	// console.log(formData);
 	$.ajax({
 		type: "POST",
 		url: "/postmethod",
@@ -91,8 +91,13 @@ function sendFormData() {
 		contentType: "application/json;charset=UTF-8",
         dataType: 'json',
 		success: function(response){
-			console.log(response);
-			populateResturant(response);
+			if (response.hasOwnProperty('errorLocation') == false) {
+				populateResturant(response);
+				displayModal();
+			}
+		},
+		error: function() {
+			populateErrorText();
 		}
 	})
 	
@@ -123,10 +128,15 @@ function populateResturant(response) {
 	$('.phone-number').text(response['display_phone']);
 	$('.resturant-location').text(address);
 	$('#google-maps-url').attr("href", 'https://www.google.com/maps/search/?api=1&query=' + encoded_name);
-	displayModal();
 }
 
 function displayModal() {
 	let result_modal = document.getElementById("resturant-container");
 	result_modal.style.display = "block";
+	confetti.start(3000);
+}
+
+function populateErrorText() {
+	let errorText = 'No Restaurants Found :(';
+	$('.errorText').text(errorText);
 }

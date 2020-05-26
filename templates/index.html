@@ -8,22 +8,29 @@
 	<head>
 		<title>Foodie</title>
 		<meta charset="utf-8" />
+		<link rel="apple-touch-icon" sizes="180x180" href="static/favicon/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="static/favicon/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="static/favicon/favicon-16x16.png">
+		<link rel="manifest" href="static/favicon/site.webmanifest">
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
 		<link rel="stylesheet" href="static/css/main.css" />
 		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 	</head>
 	<body class="is-preload">
+			<script src="https://cdn.jsdelivr.net/gh/mathusummut/confetti.js/confetti.min.js"></script>
+			<div id="content">
+				<div class="inner">
 
-			<div id="">
-				<div class="">
+					<article class="box post post-excerpt">
+						<header>
+							<h2>Welcome to Foodie</h2>
+							<p>Make a Selection from the filters to get a random restaurant!</p>
+						</header>
 
-						<article class="box post post-excerpt">
-							<header>
-								<h2>Welcome to Foodie</h2>
-								<p>Make a Selection from the filters to get a random resturant!</p>
-							</header>
-
-						</article>
+					</article>
+					<div class="errorContainer">
+						<p class="errorText"></p>
+					</div>
 					<form id="form" onsubmit="sendFormData()">
 					<label for="categories-collection" class="label">Choose a category:</label><br>
 					<div class="container">
@@ -175,13 +182,6 @@
 				</div>
 				<input class="submit-btn" type="submit" value="Submit" onclick="">
 				</form>
-
-				<!-- Search -->
-<!--					<section class="box search">-->
-<!--						<form method="post" action="#">-->
-<!--							<input type="text" class="text" name="search" placeholder="Search" />-->
-<!--						</form>-->
-<!--					</section>-->
 
 				<div id="resturant-container" class="modal" style="display:none">
 					<div class="modal-content">
