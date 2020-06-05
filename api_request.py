@@ -111,7 +111,7 @@ def query_api(categories, location, price, radius):
         selected_business_json = json.dumps(businesses[business_id_arr.index(selected_business)])
         return selected_business_json
     else:
-        return 'No business'
+        return {'error': 'no_resturant'}
 
 
 def main(jsresponse):
@@ -121,18 +121,10 @@ def main(jsresponse):
     try:
         location = jsresponse.json['location']
     except KeyError:
-        return {'errorLocation': True}
+        return {'error': 'location'}
     radius = jsresponse.json['radius']
-    # try:
-    return query_api(categories, location, price, radius)  
-    # except HTTPError as error:
-    #     sys.exit(
-    #         'Encountered HTTP error {0} on {1}:\n {2}\nAbort program.'.format(
-    #             error.code,
-    #             error.url,
-    #             error.read(),
-    #         )
-    #     )
+
+    return query_api(categories, location, price, radius)
 
 from flask import request
 app = Flask(__name__, static_url_path='/static')

@@ -63,6 +63,7 @@ function sendFormData() {
 	let price_val = '';
 	let categories_val = '';
 	let radius_val;
+	$('.errorText').hide();
 	// let rating;
 	$(".price-input:checked").each(function(){
 		if (price_val.length == 0) {
@@ -91,14 +92,13 @@ function sendFormData() {
 		contentType: "application/json;charset=UTF-8",
         dataType: 'json',
 		success: function(response){
-			if (response.hasOwnProperty('errorLocation') == false) {
+			if (response.hasOwnProperty('error') == false) {
 				populateResturant(response);
 				displayModal();
+			} else {
+				populateErrorText(response);
 			}
 		},
-		error: function() {
-			populateErrorText();
-		}
 	})
 	
 }
@@ -136,7 +136,15 @@ function displayModal() {
 	confetti.start(3000);
 }
 
-function populateErrorText() {
-	let errorText = 'No Restaurants Found :(';
+function populateErrorText(response) {
+	$('.errorText').show();
+	let errorText = ''
+	if (response['error'] == 'no_resturant') {
+	errorText = 'No Restaurants Found :(';
+	} else if (response['error'] == 'location') {
+		errorText = 'Location Not Found :(';
+	} else {
+		errorText = 'There was an issue :('
+	}
 	$('.errorText').text(errorText);
 }
