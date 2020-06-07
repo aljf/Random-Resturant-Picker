@@ -61,7 +61,7 @@ function sendFormData() {
 	// send ajax to the python server 
 	// show the response on the html
 	let price_val = '';
-	let categories_val = '';
+	let search_val = '';
 	let radius_val;
 	$('.errorText').hide();
 	// let rating;
@@ -72,17 +72,11 @@ function sendFormData() {
 			price_val = price_val + ', ' + $(this).val();
 		}	
 	});
-	$(".category-input:checked").each(function(){
-		if (categories_val.length == 0) {
-			categories_val = $(this).val();
-		} else {
-			categories_val = categories_val + ',' + $(this).val();
-		}	
-	});
+	search_val = $('.search-input').val();
 	$(".distance-input:checked").each(function(){
 		radius_val = $(this).val();
 	});
-	let formData = {price: price_val, categories: categories_val, radius: radius_val, location: location_val};
+	let formData = {price: price_val, search: search_val, radius: radius_val, location: location_val};
 	let str_data = JSON.stringify(formData);
 	// console.log(formData);
 	$.ajax({
@@ -140,11 +134,15 @@ function populateErrorText(response) {
 	$('.errorText').show();
 	let errorText = ''
 	if (response['error'] == 'no_resturant') {
-	errorText = 'No Restaurants Found :(';
+		errorText = 'No Restaurants Found :(';
 	} else if (response['error'] == 'location') {
 		errorText = 'Location Not Found :(';
+	} else if (response['error'] == 'radius') {
+		errorText = 'Distance was not selected';
+	} else if (response['error'] == 'price') {
+		errorText = 'Price was not selected';
 	} else {
-		errorText = 'There was an issue :('
+		errorText = 'There was an issue :(';
 	}
 	$('.errorText').text(errorText);
 }

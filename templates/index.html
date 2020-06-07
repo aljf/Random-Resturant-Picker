@@ -32,7 +32,12 @@
 						<p class="errorText"></p>
 					</div>
 					<form id="form" onsubmit="sendFormData()">
-					<label for="categories-collection" class="label">Choose a category:</label><br>
+					<div class="wrap">
+						<div class="search">
+							<input type="text" class="searchTerm search-input" placeholder="Example: Burgers+Pizza">
+						</div>
+					</div>
+					<!--<label for="categories-collection" class="hide">Choose a category:</label><br>
 					<div class="container">
 					<div class="categories-collection collection" id="categories-collection">
 						<div class="row">
@@ -86,10 +91,10 @@
 							</div>
 						</div>
 					</div>
-					</div><br>
+					</div><br> -->
 
 
-				<label for="price-collection" class="label">Choose a Price Range:</label><br>
+				<label for="price-collection" class="hide">Choose a Price Range:</label><br>
 
 				<div class="container">
 				<div class="price-collection collection" id="price-collection">
@@ -137,7 +142,7 @@
 				</div>
 				</div>
 
-				<label for="distance-collection" class="label">Distance (miles):</label><br>
+				<label for="distance-collection" class="hide">Distance (miles):</label><br>
 				<div class="container">
 				<div class="distance-collection collection" id="distance-collection">
 					<div class="row">

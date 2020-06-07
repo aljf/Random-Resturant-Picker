@@ -39,7 +39,7 @@ API_HOST = 'https://api.yelp.com'
 SEARCH_PATH = '/v3/businesses/search'
 BUSINESS_PATH = '/v3/businesses/' 
 
-SEARCH_LIMIT = 20
+SEARCH_MAX = 20
 
 selected_business_json = None
 
@@ -69,7 +69,7 @@ def api_request(host, path, api_key, url_params=None):
     return response.json()
 
 
-def search(api_key, term, location, price, miles, categories):
+def search(api_key, term, location, price, miles, search_limit):
     """Query the Search API by a search term and location.
     Args:
         term (str): The search term passed to the API.
@@ -78,13 +78,11 @@ def search(api_key, term, location, price, miles, categories):
         dict: The JSON response from the request.
     """
     radius = int(miles)*1609
-
     url_params = {
-        # 'term': term,
-        'categories': categories,
+        'term': term,
         'latitude': location[0],
         'longitude': location[1],
-        'limit': SEARCH_LIMIT,
+        'limit': search_limit,
         'price': price,
         'radius': radius,
         'open_now': True
@@ -92,15 +90,26 @@ def search(api_key, term, location, price, miles, categories):
     return api_request(API_HOST, SEARCH_PATH, api_key, url_params=url_params)
 
 
-def query_api(categories, location, price, radius):
+def query_api(search_term, location, price, radius):
     """Queries the API by the input values from the user.
     Args:
         term (str): The search term to query.
         location (str): The location of the business to query.
     """
-    response = search(API_KEY, None, location, price, radius, categories)
 
-    businesses = response.get('businesses')
+    if '+' in search_term:
+        businesses = []
+        plus_count = search_term.count('+')
+        search_limit = round(SEARCH_MAX/(plus_count+1))
+        # create a list of all terms separated by their '+'
+        term_list = search_term.split('+')
+        for count in range(plus_count+1):
+            print(count)
+            response = search(API_KEY, term_list[count], location, price, radius, search_limit)
+            businesses = businesses + response.get('businesses')
+    else:
+        response = search(API_KEY, search_term, location, price, radius, SEARCH_MAX)
+        businesses = response.get('businesses')
     business_id_arr = []
     if businesses:
         for i, b in enumerate(businesses):
@@ -115,22 +124,32 @@ def query_api(categories, location, price, radius):
 
 
 def main(jsresponse):
-    errorLocation = False
-    price = jsresponse.json['price']
-    categories = jsresponse.json['categories']
+    try:
+        price = jsresponse.json['price']
+    except KeyError:
+        return {'error': 'price'}
+    try:
+        search_term = jsresponse.json['search']
+    except KeyError:
+        return {'error': 'search'}
     try:
         location = jsresponse.json['location']
     except KeyError:
         return {'error': 'location'}
-    radius = jsresponse.json['radius']
+    try:
+        radius = jsresponse.json['radius']
+    except KeyError:
+        return {'error': 'radius'}
 
-    return query_api(categories, location, price, radius)
+    return query_api(search_term, location, price, radius)
+
 
 from flask import request
 app = Flask(__name__, static_url_path='/static')
 @app.route('/')
 def home_page(name=None):
     return render_template('index.html', name=name)
+
 
 @app.route('/postmethod', methods=['POST'])
 def get_post_javascript_data():
