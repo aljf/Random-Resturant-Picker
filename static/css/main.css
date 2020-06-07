@@ -2992,7 +2992,7 @@ textarea {
 	.collection label.btn-default{
 		width:90%;
 		border:1px solid #305891;
-		margin:5px; 
+		margin:7%; 
 		border-radius: 17px;
 		color: #305891;
 	}
@@ -3086,4 +3086,8 @@ textarea {
 	  .searchTerm:focus{
 		color: #305891;
 	  }
-	  
+	  .otter-logo {
+		width: 33%;
+		float: right;
+		margin-bottom: 20px;
+	  }
